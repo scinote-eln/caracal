@@ -57,7 +57,8 @@ module Caracal
         #========== VALIDATION ============================
 
         def valid?
-          !!/^TOC/.match(toc_opts)
+          a = [:opts, :size, :title]
+          a.map { |m| send("toc_#{ m }") }.compact.size == a.size
         end
 
         #--------------------------------------------------
