@@ -20,6 +20,7 @@ require 'caracal/core/relationships'
 require 'caracal/core/rules'
 require 'caracal/core/styles'
 require 'caracal/core/tables'
+require 'caracal/core/table_of_contents'
 require 'caracal/core/text'
 
 require 'caracal/renderers/app_renderer'
@@ -64,6 +65,7 @@ module Caracal
     include Caracal::Core::PageBreaks
     include Caracal::Core::Rules
     include Caracal::Core::Tables
+    include Caracal::Core::TableOfContents
     include Caracal::Core::Text
 
     include Caracal::Core::Footer
