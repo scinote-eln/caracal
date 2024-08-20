@@ -5,13 +5,11 @@ describe Caracal::Core::Models::TableOfContentsModel do
     described_class.new
   end
 
-
   #-------------------------------------------------------------
   # Configuration
   #-------------------------------------------------------------
 
   describe 'configuration tests' do
-
     # accessors
     describe 'accessors' do
       it { expect(subject.toc_opts).to eq 'TOC \o "1-1" \h \z \u \t "Heading 5,1"' }
@@ -20,14 +18,12 @@ describe Caracal::Core::Models::TableOfContentsModel do
     end
   end
 
-
   #-------------------------------------------------------------
   # Public Methods
   #-------------------------------------------------------------
 
   describe 'public method tests' do
     #=============== GETTERS ==========================
-
 
     #=============== SETTERS ==========================
 
@@ -68,24 +64,19 @@ describe Caracal::Core::Models::TableOfContentsModel do
         it { expect(subject.valid?).to eq false }
       end
     end
-
   end
-
 
   #-------------------------------------------------------------
   # Private Methods
   #-------------------------------------------------------------
 
   describe 'private method tests' do
-
     # .option_keys
     describe '.option_keys' do
       let(:actual)   { subject.send(:option_keys).sort }
-      let(:expected) { [:opts, :size, :title].sort }
+      let(:expected) { %i(opts size title).sort }
 
       it { expect(actual).to eq expected }
     end
-
   end
-
 end

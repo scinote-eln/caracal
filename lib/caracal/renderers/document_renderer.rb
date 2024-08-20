@@ -241,7 +241,7 @@ module Caracal
                 end
               end
               xml['w'].r do
-                  xml['w'].rPr do
+                xml['w'].rPr do
                   xml['w'].b
                   xml['w'].bCs
                   xml['w'].sz({ 'w:val' => model.toc_size })

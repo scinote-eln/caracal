@@ -1,15 +1,12 @@
 require 'caracal/core/models/base_model'
 
-
 module Caracal
   module Core
     module Models
-
       # This class encapsulates the logic needed to store and manipulate
       # text data.
       #
       class TableOfContentsModel < BaseModel
-
         #--------------------------------------------------
         # Configuration
         #--------------------------------------------------
@@ -20,18 +17,15 @@ module Caracal
         const_set(:DEFAULT_TITLE, 'Table of Contents')
 
         # accessors
-        attr_reader :toc_opts
-        attr_reader :toc_size
-        attr_reader :toc_title
+        attr_reader :toc_opts, :toc_size, :toc_title
 
         #-------------------------------------------------------------
         # Public Class Methods
         #-------------------------------------------------------------
-        
         # initialization
-        def initialize(options={}, &block)
-          @toc_opts  ||= DEFAULT_OPTS
-          @toc_size  ||= DEFAULT_SIZE
+        def initialize(options = {}, &block)
+          @toc_opts ||= DEFAULT_OPTS
+          @toc_size ||= DEFAULT_SIZE
           @toc_title ||= DEFAULT_TITLE
           super options, &block
         end
@@ -48,15 +42,15 @@ module Caracal
 
         # integers
         [:size].each do |m|
-          define_method "#{ m }" do |value|
-            instance_variable_set("@toc_#{ m }", value.to_i)
+          define_method "#{m}" do |value|
+            instance_variable_set("@toc_#{m}", value.to_i)
           end
         end
 
         # strings
-        [:title, :opts].each do |m|
-          define_method "#{ m }" do |value|
-            instance_variable_set("@toc_#{ m }", value.to_s)
+        %i(title opts).each do |m|
+          define_method "#{m}" do |value|
+            instance_variable_set("@toc_#{m}", value.to_s)
           end
         end
 
@@ -72,7 +66,7 @@ module Caracal
         private
 
         def option_keys
-          [:opts, :size, :title]
+          %i(opts size title)
         end
       end
     end
