@@ -9,10 +9,6 @@ module Caracal
     module Footer
       def self.included(base)
         base.class_eval do
-          #-------------------------------------------------------------
-          # Public Methods
-          #-------------------------------------------------------------
-
           def footer(*args, &block)
             options = Caracal::Utilities.extract_options!(args)
 

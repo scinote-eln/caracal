@@ -9,10 +9,6 @@ module Caracal
     module Header
       def self.included(base)
         base.class_eval do
-          #-------------------------------------------------------------
-          # Public Methods
-          #-------------------------------------------------------------
-
           def header(*args, &block)
             options = Caracal::Utilities.extract_options!(args)
 

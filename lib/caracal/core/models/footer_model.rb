@@ -14,7 +14,7 @@ module Caracal
         #-------------------------------------------------------------
 
         # initialization
-        def initialize(options={}, &block)
+        def initialize(options = {}, &block)
           super options, &block
         end
 
