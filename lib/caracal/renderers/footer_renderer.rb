@@ -21,25 +21,25 @@ module Caracal
               xml['w'].p paragraph_options do
                 xml['w'].pPr do
                   xml['w'].contextualSpacing({ 'w:val' => '0' })
-                  xml['w'].jc({ 'w:val' => "#{ document.page_number_align }" })
+                  xml['w'].jc({ 'w:val' => document.page_number_align.to_s })
                 end
                 unless document.page_number_label.nil?
                   xml['w'].r run_options do
                     xml['w'].rPr do
                       xml['w'].rStyle({ 'w:val' => 'PageNumber' })
                       unless document.page_number_label_size.nil?
-                        xml['w'].sz({ 'w:val'  => document.page_number_label_size })
+                        xml['w'].sz({ 'w:val' => document.page_number_label_size })
                       end
                     end
                     xml['w'].t({ 'xml:space' => 'preserve' }) do
-                      xml.text "#{ document.page_number_label } "
+                      xml.text "#{document.page_number_label} "
                     end
                   end
                 end
                 xml['w'].r run_options do
                   xml['w'].rPr do
                     unless document.page_number_number_size.nil?
-                      xml['w'].sz({ 'w:val'  => document.page_number_number_size })
+                      xml['w'].sz({ 'w:val' => document.page_number_number_size })
                       xml['w'].szCs({ 'w:val' => document.page_number_number_size })
                     end
                   end
@@ -58,7 +58,6 @@ module Caracal
             end
           elsif document.footer_content.present? && document.footer_content.valid?
             xml['w'].ftr root_options do
-
               #============= CONTENTS ===================================
 
               document.footer_content.contents.each do |model|

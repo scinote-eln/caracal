@@ -1,17 +1,14 @@
 require 'caracal/core/models/footer_model'
 require 'caracal/errors'
 
-
 module Caracal
   module Core
-
     # This module encapsulates all the functionality related to adding a
     # footer on every page of the document.
     #
     module Footer
       def self.included(base)
         base.class_eval do
-
           #-------------------------------------------------------------
           # Public Methods
           #-------------------------------------------------------------
@@ -25,7 +22,6 @@ module Caracal
 
             model
           end
-
         end
       end
     end

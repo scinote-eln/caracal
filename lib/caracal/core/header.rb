@@ -1,17 +1,14 @@
 require 'caracal/core/models/header_model'
 require 'caracal/errors'
 
-
 module Caracal
   module Core
-
     # This module encapsulates all the functionality related to adding a header
     # to every page of the document.
     #
     module Header
       def self.included(base)
         base.class_eval do
-
           #-------------------------------------------------------------
           # Public Methods
           #-------------------------------------------------------------

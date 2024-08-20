@@ -31,10 +31,10 @@ module Caracal
               #============= PAGE SETTINGS ==============================
 
               xml['w'].sectPr do
-                if rel = document.find_relationship('footer1.xml')
+                if (rel = document.find_relationship('footer1.xml'))
                   xml['w'].footerReference({ 'r:id' => rel.formatted_id, 'w:type' => 'default' })
                 end
-                if rel = document.find_relationship('header1.xml')
+                if (rel = document.find_relationship('header1.xml'))
                   xml['w'].headerReference({ 'r:id' => rel.formatted_id, 'w:type' => 'default' })
                 end
                 xml['w'].pgSz page_size_options

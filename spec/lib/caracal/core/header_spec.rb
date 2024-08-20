@@ -8,7 +8,6 @@ describe Caracal::Core::Text do
   #-------------------------------------------------------------
 
   describe 'configuration tests' do
-
     # accessors
     describe 'accessors' do
       it { expect(subject.header_content).to be_nil }
@@ -20,7 +19,6 @@ describe Caracal::Core::Text do
   #-------------------------------------------------------------
 
   describe 'public method tests' do
-
     describe '.header' do
       before { subject.header }
 

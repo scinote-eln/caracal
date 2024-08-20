@@ -166,7 +166,7 @@ describe Caracal::Core::Models::ParagraphModel do
     describe '.bookmark_end' do
       let!(:length) { subject.runs.length }
 
-      before { subject.bookmark_end(id:'1')}
+      before { subject.bookmark_end(id: '1') }
 
       it { expect(subject.runs.size).to eq length + 1 }
     end

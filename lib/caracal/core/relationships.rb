@@ -22,7 +22,6 @@ module Caracal
           #-------------------------------------------------------------
           # Class Methods
           #-------------------------------------------------------------
-          
           def self.default_relationships
             [
               { target: 'fontTable.xml',  type: :font      },
@@ -31,10 +30,9 @@ module Caracal
               { target: 'numbering.xml',  type: :numbering },
               { target: 'settings.xml',   type: :setting   },
               { target: 'styles.xml',     type: :style     }
-            ]           
+            ]
           end
-          
-          
+
           #-------------------------------------------------------------
           # Public Methods
           #-------------------------------------------------------------

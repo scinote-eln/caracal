@@ -10,11 +10,9 @@ describe Caracal::Core::Models::FooterModel do
   #-------------------------------------------------------------
 
   describe 'public method tests' do
-
     #=============== DATA ACCESSORS ====================
 
     describe 'data tests' do
-
       # .contents
       describe '.contents' do
         it { expect(subject.contents).to be_a(Array) }
@@ -25,7 +23,7 @@ describe Caracal::Core::Models::FooterModel do
 
     describe '.valid?' do
       describe 'when content provided' do
-        before { allow(subject).to receive(:contents).and_return(['a']) }
+        before { allow(subject).to receive(:contents).and_return(%w(a)) }
 
         it { expect(subject.valid?).to eq true }
       end
