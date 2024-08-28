@@ -31,10 +31,11 @@ module Caracal
               #============= PAGE SETTINGS ==============================
 
               xml['w'].sectPr do
-                if document.page_number_show
-                  if rel = document.find_relationship('footer1.xml')
-                    xml['w'].footerReference({ 'r:id' => rel.formatted_id, 'w:type' => 'default' })
-                  end
+                if (rel = document.find_relationship('footer1.xml'))
+                  xml['w'].footerReference({ 'r:id' => rel.formatted_id, 'w:type' => 'default' })
+                end
+                if (rel = document.find_relationship('header1.xml'))
+                  xml['w'].headerReference({ 'r:id' => rel.formatted_id, 'w:type' => 'default' })
                 end
                 xml['w'].pgSz page_size_options
                 xml['w'].pgMar page_margin_options
@@ -216,6 +217,79 @@ module Caracal
             render_run_attributes(xml, model, false)
             xml['w'].t({ 'xml:space' => 'preserve' }, model.link_content)
           end
+        end
+      end
+
+      def render_tableofcontents(xml, model)
+        xml['w'].sdt do
+          xml['w'].sdtPr do
+            xml['w'].docPartObj do
+              xml['w'].docPartGallery({ 'w:val' => model.toc_title })
+              xml['w'].docPartUnique({ 'w:val' => true })
+            end
+          end
+          xml['w'].sdtContent do
+            xml['w'].p do
+              xml['w'].pPr do
+                xml['w'].pStyle({ 'w:val' => 'ContentsHeading' })
+                xml['w'].rPr do
+                  xml['w'].b
+                  xml['w'].b
+                  xml['w'].bCs
+                  xml['w'].sz({ 'w:val' => model.toc_size })
+                  xml['w'].szCs({ 'w:val' => model.toc_size })
+                end
+              end
+              xml['w'].r do
+                xml['w'].rPr do
+                  xml['w'].b
+                  xml['w'].bCs
+                  xml['w'].sz({ 'w:val' => model.toc_size })
+                  xml['w'].szCs({ 'w:val' => model.toc_size })
+                end
+                xml['w'].t model.toc_title
+              end
+            end
+            xml['w'].p do
+              xml['w'].r do
+                xml['w'].fldChar({ 'w:fldCharType' => 'begin' })
+              end
+              xml['w'].r do
+                xml['w'].rPr do
+                  render_run_attributes(xml, model, false)
+                end
+                xml['w'].instrText({ 'xml:space' => 'preserve' }) do
+                  xml.text " #{model.toc_opts} "
+                end
+              end
+              xml['w'].r do
+                xml['w'].fldChar({ 'w:fldCharType' => 'separate' })
+              end
+              xml['w'].r do
+                xml['w'].fldChar({ 'w:fldCharType' => 'end' })
+              end
+            end
+          end
+        end
+      end
+
+      def render_field(xml, model)
+        xml['w'].r do
+          xml['w'].fldChar({ 'w:fldCharType' => 'begin' })
+        end
+        xml['w'].r do
+          xml['w'].rPr do
+            render_run_attributes(xml, model, false)
+          end
+          xml['w'].instrText({ 'xml:space' => 'preserve' }) do
+            xml.text " #{model.formatted_type} "
+          end
+        end
+        xml['w'].r do
+          xml['w'].fldChar({ 'w:fldCharType' => 'separate' })
+        end
+        xml['w'].r do
+          xml['w'].fldChar({ 'w:fldCharType' => 'end' })
         end
       end
 

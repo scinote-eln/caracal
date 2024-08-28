@@ -9,22 +9,21 @@ module Caracal
       # relationship data.
       #
       class RelationshipModel < BaseModel
-        
         #-------------------------------------------------------------
         # Configuration
         #-------------------------------------------------------------
-    
         # constants
         TYPE_MAP = {
-          font:       'http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable', 
-          footer:     'http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer',
-          image:      'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
-          link:       'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',
-          numbering:  'http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering',
-          setting:    'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings',
-          style:      'http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles'
-        }
-        
+          font: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable',
+          footer: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer',
+          header: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/header',
+          image: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
+          link: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',
+          numbering: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering',
+          setting: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings',
+          style: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles'
+        }.freeze
+
         # accessors
         attr_reader :relationship_id
         attr_reader :relationship_key
