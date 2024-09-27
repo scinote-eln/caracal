@@ -30,7 +30,6 @@ module Caracal
         const_set(:DEFAULT_STYLE_NEXT,       'Normal')
         const_set(:DEFAULT_STYLE_LEVEL,      -1)
 
-
         # accessors
         attr_reader :style_default
         attr_reader :style_id
