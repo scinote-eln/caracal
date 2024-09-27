@@ -77,6 +77,12 @@ module Caracal
                   xml['w'].contextualSpacing({ 'w:val' => '1' })
                   xml['w'].jc({ 'w:val' => s.style_align.to_s }) unless s.style_align.nil?
                   xml['w'].ind(indentation_options(s)) unless indentation_options(s).nil?
+                  if !s.style_level.nil? && s.style_level > -1
+                    xml['w'].numPr do
+                      xml['w'].numId({ 'w:val' => 1 })
+                      xml['w'].ilvl({ 'w:val' => s.style_level.to_s })
+                    end
+                  end
                 end
                 xml['w'].rPr do
                   xml['w'].rFonts(font_options(s)) unless s.style_font.nil?
