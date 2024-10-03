@@ -49,16 +49,20 @@ module Caracal
               end
             end
 
-            xml['w'].abstractNum({ 'w:abstractNumId' => 1 }) do
-              xml['w'].multiLevelType({ 'w:val' => 'hybridMultilevel' })
-              create_lvl(xml, 0, 'Heading1', '%1.')
-              create_lvl(xml, 1, 'Heading2', '%1.%2.')
-              create_lvl(xml, 2, 'Heading5', '%1.%2.%4.')
-              create_lvl(xml, 3, 'Heading4', '%1.%2.%4.%5.')
+            if %w(Heading1 Heading2 Heading3 Heading4).any? do |style_name|
+              document.styles.find { |style| style.style_id == style_name }&.style_level.present?
             end
+              xml['w'].abstractNum({ 'w:abstractNumId' => 1 }) do
+                xml['w'].multiLevelType({ 'w:val' => 'hybridMultilevel' })
+                create_lvl(xml, 0, 'Heading1', '%1.')
+                create_lvl(xml, 1, 'Heading2', '%1.%2.')
+                create_lvl(xml, 2, 'Heading3', '%1.%2.%4.')
+                create_lvl(xml, 3, 'Heading4', '%1.%2.%4.%5.')
+              end
 
-            xml['w'].num({ 'w:numId' => 1 }) do
-              xml['w'].abstractNumId({ 'w:val' => 1 })
+              xml['w'].num({ 'w:numId' => 1 }) do
+                xml['w'].abstractNumId({ 'w:val' => 1 })
+              end
             end
           end
         end
