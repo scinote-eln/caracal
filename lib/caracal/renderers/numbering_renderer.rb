@@ -19,6 +19,14 @@ module Caracal
         builder = ::Nokogiri::XML::Builder.with(declaration_xml) do |xml|
           xml['w'].numbering root_options do
             # add abstract definitions
+            xml['w'].abstractNum({ 'w:abstractNumId' => 1 }) do
+              xml['w'].multiLevelType({ 'w:val' => 'hybridMultilevel' })
+              create_lvl(xml, 0, '%1.')
+              create_lvl(xml, 1, '%1.%2.')
+              create_lvl(xml, 2, '%1.%2.%3.')
+              create_lvl(xml, 3, '%1.%2.%3.%4.')
+            end
+
             document.toplevel_lists.each_with_index do |model, i|
               xml['w'].abstractNum({ 'w:abstractNumId' => i + 2 }) do
                 xml['w'].multiLevelType({ 'w:val' => 'hybridMultilevel' })
@@ -43,33 +51,19 @@ module Caracal
             end
 
             # bind individual tables to abstract definitions
+            xml['w'].num({ 'w:numId' => 1 }) do
+              xml['w'].abstractNumId({ 'w:val' => 1 })
+            end
+
             document.toplevel_lists.each_with_index do |model, i|
               xml['w'].num({ 'w:numId' => i + 2 }) do
                 xml['w'].abstractNumId({ 'w:val' => i + 2 })
-              end
-            end
-
-            if %w(Heading1 Heading2 Heading3 Heading4).any? do |style_name|
-              document.styles.find { |style| style.style_id == style_name }&.style_level.present?
-            end
-              xml['w'].abstractNum({ 'w:abstractNumId' => 1 }) do
-                xml['w'].multiLevelType({ 'w:val' => 'hybridMultilevel' })
-                create_lvl(xml, 0, 'Heading1', '%1.')
-                create_lvl(xml, 1, 'Heading2', '%1.%2.')
-                create_lvl(xml, 2, 'Heading3', '%1.%2.%4.')
-                create_lvl(xml, 3, 'Heading4', '%1.%2.%4.%5.')
-              end
-
-              xml['w'].num({ 'w:numId' => 1 }) do
-                xml['w'].abstractNumId({ 'w:val' => 1 })
               end
             end
           end
         end
         builder.to_xml(save_options)
       end
-
-
 
       #-------------------------------------------------------------
       # Private Methods
@@ -96,18 +90,18 @@ module Caracal
         }
       end
 
-      def create_lvl(xml, ilvl, p_style, lvl_text)
-        if document.styles.find { |style| style.style_id == p_style }.style_level == ilvl
-          padding = 430 + (140 * ilvl)
-          xml['w'].lvl({ 'w:ilvl' => ilvl }) do
-            xml['w'].start({ 'w:val' => 1 })
-            xml['w'].numFmt({ 'w:val' => 'decimal' })
-            xml['w'].pStyle({ 'w:val' => p_style })
-            xml['w'].lvlText({ 'w:val' => lvl_text })
-            xml['w'].lvlJc({ 'w:val' => 'left' })
-            xml['w'].pPr do
-              xml['w'].ind({ 'w:left' => padding, 'w:hanging' => padding })
-            end
+      def create_lvl(xml, ilvl, lvl_text)
+        padding = 430 + (140 * ilvl)
+        xml['w'].lvl({ 'w:ilvl' => ilvl }) do
+          xml['w'].start({ 'w:val' => 1 })
+          xml['w'].numFmt({ 'w:val' => 'decimal' })
+          xml['w'].lvlText({ 'w:val' => lvl_text })
+          xml['w'].lvlJc({ 'w:val' => 'left' })
+          xml['w'].pPr do
+            xml['w'].ind({ 'w:left' => padding, 'w:hanging' => padding })
+          end
+          xml['w'].rPr do
+            xml['w'].u({ 'w:val' => 'none' })
           end
         end
       end
